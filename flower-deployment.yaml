@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: D:\APPS\kompose\bin\kompose.exe convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flower
+  name: flower
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: flower
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: D:\APPS\kompose\bin\kompose.exe convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: flower
+    spec:
+      containers:
+      - args:
+        - flower
+        env:
+        - name: EXECUTOR
+          value: Celery
+        image: puckel/docker-airflow:1.10.9
+        imagePullPolicy: ""
+        name: flower
+        ports:
+        - containerPort: 5555
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

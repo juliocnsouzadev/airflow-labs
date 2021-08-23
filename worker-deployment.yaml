@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: D:\APPS\kompose\bin\kompose.exe convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: worker
+  name: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: worker
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: D:\APPS\kompose\bin\kompose.exe convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: worker
+    spec:
+      containers:
+      - args:
+        - worker
+        env:
+        - name: EXECUTOR
+          value: Celery
+        - name: FERNET_KEY
+          value: 46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+        image: puckel/docker-airflow:1.10.9
+        imagePullPolicy: ""
+        name: worker
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
